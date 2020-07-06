@@ -5,7 +5,7 @@
     <ion-datetime displayFormat="mm:ss" placeholder="Change Task Time" [(ngModel)]="taskTime"></ion-datetime>
   </ion-item>
   <div [style.height]="'60%'" >
-    <circle-progress (click)="startCounting()"
+    <circle-progress
       [percent]="percent"
       [maxPercent]="100"
       [animation]="false"
@@ -23,5 +23,31 @@
   </div>
 
   <p>{{ elapsed.h }}:{{ elapsed.m }}:{{ elapsed.s }}</p>
+
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ng-container *ngIf="timer == false; else running">
+      <ion-fab-button color="primary" (click)="startCounting()">
+        <ion-icon name="play"></ion-icon>
+      </ion-fab-button>
+    </ng-container>
+    <ng-template #running>
+      <ion-fab-button color="tertiary" *ngIf="pause == true" (click)="pause = false;">
+        <ion-icon name="play"></ion-icon>
+      </ion-fab-button>
+      <ng-container *ngIf="pause == false">
+        <ion-fab-button color="primary">
+          <ion-icon md="caret-back" ios="chevron-back-circle-outline"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-list side="start">
+          <ion-fab-button color="dark" (click)="stopCounting()">
+            <ion-icon name="square"></ion-icon>
+          </ion-fab-button>
+          <ion-fab-button color="dark" (click)="pause = true;">
+            <ion-icon name="pause"></ion-icon>
+          </ion-fab-button>
+        </ion-fab-list>
+      </ng-container>
+    </ng-template>
+  </ion-fab>
 
 </ion-content>
