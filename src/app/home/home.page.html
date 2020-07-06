@@ -1,20 +1,27 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <ion-item color="dark">
+    <ion-label>Task Duration</ion-label>
+    <ion-datetime displayFormat="mm:ss" placeholder="Change Task Time" [(ngModel)]="taskTime"></ion-datetime>
+  </ion-item>
+  <div [style.height]="'60%'" >
+    <circle-progress (click)="startCounting()"
+      [percent]="percent"
+      [maxPercent]="100"
+      [animation]="false"
+      [showTitle]="false"
+      [showSubtitle]="false"
+      [showUnits]="false"
+      [showZeroOuterStroke]="false"
+      [outerStrokeColor]="'#ff5500'"
+      [outerStrokeGradient]="true"
+      [outerStrokeGradientStopColor]="'#E53A40'"
+      [backgroundStroke]="'#121212'"
+      [backgroundStrokeWidth]="3"
+      [showInnerStroke]="false">
+    </circle-progress>
   </div>
+
+  <p>{{ elapsed.h }}:{{ elapsed.m }}:{{ elapsed.s }}</p>
+
 </ion-content>
